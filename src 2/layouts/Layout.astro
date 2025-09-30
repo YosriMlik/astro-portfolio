@@ -1,0 +1,135 @@
+---
+export interface Props {
+  title: string;
+  description?: string;
+}
+
+const { title, description = "Yosri Mlik - Full-Stack Developer specializing in web and mobile applications" } = Astro.props;
+---
+
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="description" content={description} />
+    
+    <!-- Favicon -->
+    <link rel="favicon" href="/img/logo/logo_small_icon_only.png" type="image/x-icon" />
+    <link rel="icon" href="/img/logo/logo_small_icon_only.png" type="image/x-icon" />
+    
+    <!-- Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@500&display=swap" rel="stylesheet" />
+    
+    <!-- External CSS -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css" />
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.css" />
+    
+    <!-- Global Styles -->
+    <link rel="stylesheet" href="/src/styles/global.css" />
+    <link rel="stylesheet" href="/src/styles/components/header.css" />
+    <link rel="stylesheet" href="/src/styles/components/hero.css" />
+    <link rel="stylesheet" href="/src/styles/components/services.css" />
+    <link rel="stylesheet" href="/src/styles/components/projects.css" />
+    
+    <title>{title}</title>
+  </head>
+  <body>
+    <slot />
+    
+    <!-- External Scripts -->
+    <script src="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.js"></script>
+    
+    <!-- Global Scripts -->
+    <script>
+      // Fix for VH unit on mobile - more robust solution
+      function setVH() {
+        let vh = window.innerHeight * 0.01;
+        document.documentElement.style.setProperty("--vh", `${vh}px`);
+      }
+
+      // Set initial value
+      setVH();
+
+      // Update on resize and orientation change
+      window.addEventListener("resize", setVH);
+      window.addEventListener("orientationchange", () => {
+        // Delay to ensure proper height calculation after orientation change
+        setTimeout(setVH, 100);
+      });
+
+      // Header scroll effect
+      function updateHeader() {
+        const header = document.querySelector(".header");
+        if (header) {
+          if (window.pageYOffset > 50) {
+            header.style.backgroundColor = "rgba(255, 255, 255, 0.95)";
+            header.style.backdropFilter = "blur(10px)";
+            header.style.boxShadow = "0 2px 10px rgba(0, 0, 0, 0.1)";
+            header.classList.add("scrolled");
+          } else {
+            header.style.backgroundColor = "rgba(255, 255, 255, 0.1)";
+            header.style.backdropFilter = "blur(5px)";
+            header.style.boxShadow = "none";
+            header.classList.remove("scrolled");
+          }
+        }
+      }
+
+      // Add scroll listener
+      window.addEventListener("scroll", updateHeader, { passive: true });
+
+      // Mobile menu functionality
+      document.addEventListener("DOMContentLoaded", function() {
+        const navLinks = document.querySelectorAll(".nav-link");
+        const menu = document.querySelector(".nav-menu");
+        const bars = document.querySelector(".header .fa-bars");
+
+        if (bars && menu) {
+          navLinks.forEach((link) => {
+            link.addEventListener("click", () => {
+              menu.classList.remove("show");
+            });
+          });
+
+          bars.addEventListener("click", function () {
+            menu.classList.toggle("show");
+          });
+        }
+
+        // Contact modal functionality
+        window.openContactModal = function() {
+          const modal = document.getElementById("contact-modal");
+          if (modal) {
+            modal.showModal();
+          }
+        };
+
+        window.closeContactModal = function() {
+          const modal = document.getElementById("contact-modal");
+          if (modal) {
+            modal.close();
+          }
+        };
+
+        // Initialize Swiper
+        const swiper = new Swiper(".swiper", {
+          loop: true,
+          autoplay: {
+            delay: 3500,
+          },
+          navigation: {
+            nextEl: ".swiper-button-next",
+            prevEl: ".swiper-button-prev",
+          },
+          pagination: {
+            el: ".swiper-pagination",
+            clickable: true,
+          },
+        });
+      });
+    </script>
+  </body>
+</html>

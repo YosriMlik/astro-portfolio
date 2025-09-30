@@ -1,0 +1,159 @@
+.container {
+  min-height: calc(var(--vh, 1vh) * 100);
+  width: 100%;
+  background: rgb(17, 237, 237);
+  background: linear-gradient(
+    155deg,
+    rgba(17, 237, 237, 0.3) 0%,
+    rgba(237, 89, 222, 0.1) 0%,
+    rgba(17, 237, 237, 0.3) 66%,
+    rgba(237, 89, 222, 0.3) 85%
+  );
+  position: relative;
+}
+
+.container:after {
+  position: absolute;
+  top: 18%;
+  right: 15%;
+  content: "";
+  height: 550px;
+  width: 550px;
+  background-color: #104998;
+  border-radius: 50%;
+  filter: blur(60px);
+  opacity: 0.5;
+}
+
+/* Hero Section */
+.hero {
+  min-height: calc(var(--vh, 1vh) * 100);
+  width: 100%;
+  display: flex;
+  align-items: flex-start;
+  padding: 100px 8% 0;
+}
+
+.hero .content {
+  min-height: 650px;
+  width: 60%;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: flex-start;
+  font-size: 18px;
+}
+
+.hero .content h1 {
+  font-size: 3.5rem;
+  letter-spacing: 1px;
+  line-height: 4.2rem;
+  margin: 10px 0;
+  margin-top: 2rem;
+}
+
+.hero .content p {
+  letter-spacing: 1px;
+  width: 70%;
+  margin: 10px 0;
+  margin-bottom: 2rem;
+}
+
+.hero .content button {
+  background-color: #1c1c1c;
+  color: #fff;
+}
+
+.hero .content button::after {
+  background-color: #000;
+}
+
+.hero-image {
+  height: 100%;
+  width: 50%;
+  z-index: 1;
+  margin-top: 3rem;
+}
+
+.hero-image img {
+  height: 90%;
+  width: 90%;
+}
+
+/* Media Queries */
+@media (max-width: 1100px) {
+  .container:after {
+    right: 5%;
+  }
+
+  .hero-image {
+    width: 60%;
+    text-align: center;
+  }
+
+  .hero {
+    flex-direction: column;
+  }
+
+  .hero-image, .hero .content {
+    width: 100%;
+    align-items: center;
+  }
+
+  .hero .content {
+    min-height: 460px;
+    margin-top: 0;
+    padding: 5% 0;
+    justify-content: flex-start;
+    text-align: center;
+  }
+
+  .container:after {
+    top: 50%;
+  }
+}
+
+/* High-resolution mobile devices (1080p smartphones) */
+@media (max-width: 1100px) and (min-height: 800px) {
+  .hero {
+    padding-top: 120px;
+  }
+}
+
+@media (max-width: 768px) {
+  .hero {
+    padding: 100px 15px 0;
+  }
+
+  /* Ensure full viewport height on mobile */
+  .container {
+    min-height: 100vh;
+    min-height: calc(var(--vh, 1vh) * 100);
+  }
+
+  .hero {
+    min-height: calc(100vh - 100px);
+    min-height: calc(var(--vh, 1vh) * 100 - 100px);
+  }
+}
+
+@media (max-width: 500px) {
+  .hero .content h1 {
+    font-size: 2.1rem;
+  }
+
+  .hero-image img {
+    width: 100%;
+  }
+
+  /* Additional mobile viewport fixes */
+  .hero {
+    padding: 120px 15px 0;
+  }
+
+  /* Ensure proper viewport usage */
+  body {
+    min-height: 100vh;
+    min-height: calc(var(--vh, 1vh) * 100);
+  }
+}

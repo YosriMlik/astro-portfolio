@@ -1,0 +1,29 @@
+---
+import { contactInfo } from '../data/contact.js';
+---
+
+<dialog id="contact-modal">
+  <p style="width: 100%; text-align: right; cursor: pointer;">
+    <span onclick="closeContactModal()" style="font-size: 1.2rem;">❌</span>
+    <br />
+  </p>
+  <h2>
+    <img src="/img/phone-call.svg" alt="Phone" />
+    <a href={`tel:${contactInfo.phone}`}>{contactInfo.phone}</a>
+  </h2>
+  <br />
+  <h2>
+    <img src="/img/envelope.svg" alt="Email" />
+    <a
+      href={`mailto:${contactInfo.email}?subject=${contactInfo.emailSubject}&body=${contactInfo.emailBody}`}
+      target="_blank"
+    >
+      {contactInfo.email}
+    </a>
+  </h2>
+  <br />
+  <h2>
+    <img src="/img/Linkedin-Logo--Streamline-Radix.svg" alt="LinkedIn" />
+    <a target="_blank" href={contactInfo.linkedin}>LinkedIn</a>
+  </h2>
+</dialog>

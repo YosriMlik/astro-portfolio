@@ -1,0 +1,111 @@
+/* Resume Section */
+.resume {
+  background: rgb(245, 245, 245);
+  padding: 5% 8%;
+}
+
+.resume-section .resume .detail h1 {
+  font-size: 3.5rem;
+  font-weight: 800;
+  padding-top: 120px;
+}
+
+.resume-section .resume .detail .card-wrapper .card {
+  padding: 20px 30px;
+  display: flex;
+  justify-content: space-evenly;
+  background-color: #fff;
+  border-radius: 5px;
+  margin-bottom: 4rem;
+}
+
+.resume-section .resume .detail .card-wrapper .card .description {
+  width: 600px;
+}
+
+.resume-section .resume .detail .card-wrapper .card .description h2 {
+  font-size: 2rem;
+}
+
+/* Project Description Styles */
+.resume-section .resume .detail .card-wrapper .card .description ul.project-description {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+
+.resume-section .resume .detail .card-wrapper .card .description ul.project-description li {
+  margin: 10px 0;
+}
+
+.resume-section .resume .detail .card-wrapper .card .description ul.project-description li p {
+  margin: 10px 0;
+  font-size: 1rem;
+  line-height: 1.5;
+}
+
+/* Swiper Styles */
+.swiper {
+  width: 500px;
+  height: 280px;
+  margin-right: 0 !important;
+}
+
+.swiper-slide {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background-color: transparent;
+  border-radius: 0px;
+  overflow: hidden;
+}
+
+.swiper-slide img {
+  width: 100%;
+  object-fit: contain;
+}
+
+/* Navigation buttons */
+.swiper-button-next,
+.swiper-button-prev {
+  color: #1c1c1c !important;
+  background-color: transparent !important;
+  width: 40px !important;
+  height: 40px !important;
+}
+
+/* Pagination */
+.swiper-pagination-bullet {
+  background-color: #1c1c1c;
+}
+
+.swiper-pagination-bullet-active {
+  background-color: #104998;
+}
+
+/* Media Queries */
+@media (max-width: 1100px) {
+  .swiper {
+    width: 100%;
+    height: auto;
+  }
+
+  .swiper-slide img {
+    max-height: 200px;
+    object-fit: contain;
+  }
+
+  .resume-section .resume .detail .card-wrapper .card {
+    flex-direction: column;
+    align-items: center;
+  }
+
+  .resume-section .resume .detail .card-wrapper .card .description {
+    width: 100%;
+    margin-bottom: 20px;
+  }
+
+  .swiper {
+    width: 100%;
+  }
+}

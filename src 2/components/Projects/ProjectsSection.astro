@@ -1,0 +1,17 @@
+---
+import ProjectCard from './ProjectCard.astro';
+import { projects } from '../../data/projects.js';
+---
+
+<div class="resume-section" id="projects">
+  <div class="resume">
+    <div class="detail">
+      <h1>Projects 🛠️</h1>
+      <div class="card-wrapper">
+        {projects.map((project) => (
+          <ProjectCard {...project} />
+        ))}
+      </div>
+    </div>
+  </div>
+</div>
