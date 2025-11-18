@@ -22,6 +22,25 @@ export const projects = [
     ]
   },
   {
+    title: "AI Chat",
+    date: "",
+    description: "AI Chat application",
+    technologies: ["React/TypeScript", "Go/Fiber"],
+    details: [
+      "AI Chat application",
+      "Technologies: React/TypeScript, Go/Fiber"
+    ],
+    links: {
+      demo: "https://chat-with-llm.netlify.app/",
+      repo: null,
+      download: null
+    },
+    images: [
+      { src: "/img/chat-llm.jpeg", alt: "AI Chat Screenshot 1" },
+      { src: "/img/chat-llm2.jpeg", alt: "AI Chat Screenshot 2" },
+    ]
+  },
+  {
     title: "WiFi Password App",
     date: "04/2024",
     description: "Retrieve saved WiFi passwords securely",
