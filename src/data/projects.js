@@ -28,10 +28,10 @@ export const projects = [
     technologies: ["React/TypeScript", "Go/Fiber"],
     details: [
       "AI Chat application",
-      "Technologies: React/TypeScript, Go/Fiber"
+      "Technologies: Next JS, Shadcn UI"
     ],
     links: {
-      demo: "https://chat-with-llm.netlify.app/",
+      demo: "https://llm-wrapper-ymlik.vercel.app/",
       repo: null,
       download: null
     },
