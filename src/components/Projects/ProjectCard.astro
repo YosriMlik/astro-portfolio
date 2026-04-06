@@ -8,50 +8,96 @@ export interface Props {
   technologies: string[];
   details: string[];
   links: {
-    demo: string;
+    demo: string | null;
     repo: string | null;
     download: string | null;
   };
   images: { src: string; alt: string }[];
-  clientLink?: string;
+  clientLink?: { name: string; url: string };
 }
 
 const { title, date, description, technologies, details, links, images, clientLink } = Astro.props;
 ---
 
-<div class="card">
-  <div class="description">
-    <h2>{title}</h2>
-    <ul class="project-description">
-      <li>
+<div class="bg-zinc-100 dark:bg-slate-900 rounded-lg overflow-hidden border border-custom transition-all duration-300 group">
+  <div class="p-6">
+    <div class="mb-4">
+      <div class="flex items-start justify-between gap-4 mb-3">
+        <h3 class="text-xl font-bold text-primary group-hover:text-accent transition-colors">{title}</h3>
+        {date && <span class="text-sm text-tertiary">{date}</span>}
+      </div>
+      
+      <p class="text-secondary mb-4 leading-relaxed">{description}</p>
+      
+      <div class="flex flex-wrap gap-2 mb-4">
+        {technologies.map((tech) => (
+          <span class="px-3 py-1 bg-accent/10 text-accent rounded-full text-sm font-medium">
+            {tech}
+          </span>
+        ))}
+      </div>
+      
+      <div class="space-y-2 text-sm">
         {details.map((detail) => (
-          <p>
-            &#9679; {detail.includes('Client :') && clientLink ? (
+          <p class="text-tertiary">
+            {detail.includes('Client :') && clientLink ? (
               <>
-                Client : <a href={clientLink.url} target="_blank" rel="noopener noreferrer" style="color: blue;">{clientLink.name}</a>
+                Client :{' '}
+                <a 
+                  href={clientLink.url} 
+                  target="_blank" 
+                  rel="noopener noreferrer" 
+                  class="text-accent hover:text-accent-hover link-hover font-medium"
+                >
+                  {clientLink.name}
+                </a>
               </>
             ) : (
               detail
             )}
           </p>
         ))}
-        {links.demo && (
-          <p>
-            &#9679; Link : <a style="color: blue;" href={links.demo} target="_blank" rel="noopener noreferrer">{links.demo.replace('https://', '')}</a>
-          </p>
-        )}
-        {links.repo && (
-          <p>
-            &#9679; {links.download ? 'Repo' : 'Github Repo'} : <a style="color: blue;" href={links.repo} target="_blank" rel="noopener noreferrer">{links.repo.replace('https://', '')}</a>
-          </p>
-        )}
-        {links.download && (
-          <p>
-            &#9679; <a style="color: blue;" href={links.download} target="_blank" rel="noopener noreferrer">Download 🚀</a>
-          </p>
-        )}
-      </li>
-    </ul>
+        
+        <div class="flex flex-wrap gap-4 pt-2">
+          {links.demo && (
+            <a 
+              href={links.demo} 
+              target="_blank" 
+              rel="noopener noreferrer"
+              class="inline-flex items-center gap-2 px-4 py-2 bg-accent text-white rounded-full hover:bg-accent-hover transition-colors btn-hover text-sm font-medium"
+            >
+              <i class="fas fa-external-link-alt"></i>
+              Live Demo
+            </a>
+          )}
+          
+          {links.repo && (
+            <a 
+              href={links.repo} 
+              target="_blank" 
+              rel="noopener noreferrer"
+              class="inline-flex items-center gap-2 px-4 py-2 border-2 border-accent text-accent rounded-full hover:bg-accent hover:text-white transition-all text-sm font-medium"
+            >
+              <i class="fab fa-github"></i>
+              {links.download ? 'Download' : 'View Code'}
+            </a>
+          )}
+          
+          {links.download && (
+            <a 
+              href={links.download} 
+              target="_blank" 
+              rel="noopener noreferrer"
+              class="inline-flex items-center gap-2 px-4 py-2 bg-linear-to-rfrom-accent to-accent-hover text-white rounded-full hover:scale-105 transition-all text-sm font-medium"
+            >
+              <i class="fas fa-download"></i>
+              Download
+            </a>
+          )}
+        </div>
+      </div>
+    </div>
   </div>
-  <ProjectSlider images={images} />
+  
+  <div class="p-2"><ProjectSlider images={images} /></div>
 </div>

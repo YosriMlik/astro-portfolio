@@ -87,39 +87,39 @@ export const projects = [
       { src: "/img/Defences.png", alt: "Defenses List Screenshot" }
     ]
   },
-  {
-    title: "Live Chat Application",
-    date: null,
-    description: "Real-time chat application",
-    technologies: ["Go Fiber", "React"],
-    details: [
-      "Technologies : Go Fiber, React"
-    ],
-    links: {
-      demo: "https://golang-react-chatapp.onrender.com/",
-      repo: "https://github.com/YosriMlik/golang-react-chatapp",
-      download: null
-    },
-    images: [
-      { src: "/img/chat.png", alt: "Chat Application Screenshot" }
-    ]
-  },
-  {
-    title: "Basic Django Application",
-    date: null,
-    description: "A web application created to learn the basics of Django and server-side components with HTMX",
-    technologies: ["Django", "HTMX"],
-    details: [
-      "A web application created to learn the basics of Django and server-side components with HTMX"
-    ],
-    links: {
-      demo: "https://cbsformulaire.pythonanywhere.com/",
-      repo: "https://github.com/YosriMlik/django-htmx",
-      download: null
-    },
-    images: [
-      { src: "/img/Django 1.png", alt: "Django App Screenshot 1" },
-      { src: "/img/Django 2.png", alt: "Django App Screenshot 2" }
-    ]
-  }
+  // {
+  //   title: "Live Chat Application",
+  //   date: null,
+  //   description: "Real-time chat application",
+  //   technologies: ["Go Fiber", "React"],
+  //   details: [
+  //     "Technologies : Go Fiber, React"
+  //   ],
+  //   links: {
+  //     demo: "https://golang-react-chatapp.onrender.com/",
+  //     repo: "https://github.com/YosriMlik/golang-react-chatapp",
+  //     download: null
+  //   },
+  //   images: [
+  //     { src: "/img/chat.png", alt: "Chat Application Screenshot" }
+  //   ]
+  // },
+  // {
+  //   title: "Basic Django Application",
+  //   date: null,
+  //   description: "A web application created to learn the basics of Django and server-side components with HTMX",
+  //   technologies: ["Django", "HTMX"],
+  //   details: [
+  //     "A web application created to learn the basics of Django and server-side components with HTMX"
+  //   ],
+  //   links: {
+  //     demo: "https://cbsformulaire.pythonanywhere.com/",
+  //     repo: "https://github.com/YosriMlik/django-htmx",
+  //     download: null
+  //   },
+  //   images: [
+  //     { src: "/img/Django 1.png", alt: "Django App Screenshot 1" },
+  //     { src: "/img/Django 2.png", alt: "Django App Screenshot 2" }
+  //   ]
+  // }
 ]

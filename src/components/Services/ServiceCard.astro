@@ -13,22 +13,21 @@ export interface Props {
 const { title, technologies, isWide = false } = Astro.props;
 ---
 
-<div class={`card ${isWide ? 'card-wide' : ''}`}>
-  <img src="/img/code_logo.png" alt="Code Logo" />
-  <div class="content">
-    <h2>{title}</h2>
-    {title === "DevOps" ? (
-      <div class="icon-container">
-        {technologies.map((tech) => (
-          (tech.name !== "") ? <TechIcon {...tech} /> : null
-        ))}
-      </div>
-    ) : (
-      <>
-        {technologies.map((tech) => (
+<div class={`glass rounded-2xl p-6 border border-custom transition-all duration-300 ${isWide ? 'md:col-span-2' : ''}`}>
+  <div class="flex items-center gap-4 mb-6">
+    <div class="w-12 h-12 bg-gradient-to-br from-accent/20 to-accent-hover/10 rounded-full flex items-center justify-center">
+      <i class="fas fa-code text-accent text-lg"></i>
+    </div>
+    <h3 class="text-xl font-bold text-primary">{title}</h3>
+  </div>
+  
+  <div class={`grid gap-3 ${isWide ? 'grid-cols-4 md:grid-cols-6 lg:grid-cols-8' : 'grid-cols-3 md:grid-cols-4 lg:grid-cols-5'}`}>
+    {technologies.map((tech) => (
+      tech.name !== "" ? (
+        <div class="flex items-center justify-center p-2 rounded-lg bg-tertiary/20 hover:bg-tertiary/30 transition-colors">
           <TechIcon {...tech} />
-        ))}
-      </>
-    )}
+        </div>
+      ) : null
+    ))}
   </div>
 </div>

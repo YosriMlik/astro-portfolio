@@ -3,15 +3,50 @@ import ProjectCard from './ProjectCard.astro';
 import { projects } from '../../data/projects.js';
 ---
 
-<div class="resume-section" id="projects">
-  <div class="resume">
-    <div class="detail">
-      <h1>Projects 🛠️</h1>
-      <div class="card-wrapper">
-        {projects.map((project) => (
-          <ProjectCard {...project} />
-        ))}
-      </div>
+<section class="py-20 pt-15 bg-primary" id="projects">
+  <div class="container mx-auto px-6">
+    <div class="text-center mb-16 scroll-animate">
+      <h2 class="text-3xl md:text-4xl font-bold text-primary mb-4">
+        Featured <span class="gradient-text">Projects</span>
+      </h2>
+      <p class="text-lg text-secondary max-w-2xl mx-auto">
+        A selection of my recent work showcasing various technologies and solutions
+      </p>
+    </div>
+    
+    <div class="grid grid-cols-1 gap-8 max-w-6xl mx-auto ">
+      {projects.map((project) => (
+        <ProjectCard 
+          title={project.title}
+          date={project.date}
+          description={project.description}
+          technologies={project.technologies}
+          details={project.details}
+          links={project.links}
+          images={project.images}
+          clientLink={project.clientLink}
+        />
+      ))}
     </div>
   </div>
-</div>
+</section>
+
+<script>
+  document.addEventListener('DOMContentLoaded', () => {
+    const observerOptions = {
+      threshold: 0.1,
+      rootMargin: '0px 0px -50px 0px'
+    };
+
+    const observer = new IntersectionObserver((entries) => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting) {
+          entry.target.classList.add('visible');
+        }
+      });
+    }, observerOptions);
+
+    const scrollElements = document.querySelectorAll('.scroll-animate');
+    scrollElements.forEach(el => observer.observe(el));
+  });
+</script>

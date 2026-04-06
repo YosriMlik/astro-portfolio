@@ -3,11 +3,41 @@ import ServiceCard from './ServiceCard.astro';
 import { services } from '../../data/services.js';
 ---
 
-<section class="service" id="services">
-  <h1>Provided Services ☑️</h1>
-  <div class="cards">
-    {services.map((service) => (
-      <ServiceCard {...service} />
-    ))}
+<section class="py-20 bg-secondary" id="services">
+  <div class="container mx-auto px-6">
+    <div class="text-center mb-16 scroll-animate">
+      <h2 class="text-3xl md:text-4xl font-bold text-primary mb-4">
+        Services <span class="gradient-text">I Provide</span>
+      </h2>
+      <p class="text-lg text-secondary max-w-2xl mx-auto">
+        Full-stack development solutions with modern technologies and best practices
+      </p>
+    </div>
+    
+    <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
+      {services.map((service) => (
+        <ServiceCard {...service} />
+      ))}
+    </div>
   </div>
 </section>
+
+<script>
+  document.addEventListener('DOMContentLoaded', () => {
+    const observerOptions = {
+      threshold: 0.1,
+      rootMargin: '0px 0px -50px 0px'
+    };
+
+    const observer = new IntersectionObserver((entries) => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting) {
+          entry.target.classList.add('visible');
+        }
+      });
+    }, observerOptions);
+
+    const scrollElements = document.querySelectorAll('.scroll-animate');
+    scrollElements.forEach(el => observer.observe(el));
+  });
+</script>

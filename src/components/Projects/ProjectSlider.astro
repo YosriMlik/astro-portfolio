@@ -5,15 +5,20 @@ export interface Props {
     alt: string;
   }>;
 }
-
+ 
 const { images } = Astro.props;
 ---
-
+ 
 <div class="swiper">
   <div class="swiper-wrapper">
     {images.map((image) => (
       <div class="swiper-slide">
-        <img src={image.src} alt={image.alt} />
+        <img 
+          src={image.src} 
+          alt={image.alt}
+          class="w-full h-80 md:h-112 object-contain bg-secondary rounded-lg"
+          loading="lazy"
+        />
       </div>
     ))}
   </div>

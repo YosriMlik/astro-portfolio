@@ -2,28 +2,47 @@
 import { contactInfo } from '../data/contact.js';
 ---
 
-<dialog id="contact-modal">
-  <p style="width: 100%; text-align: right; cursor: pointer;">
-    <span onclick="closeContactModal()" style="font-size: 1.2rem;">❌</span>
-    <br />
-  </p>
-  <!-- <h2>
-    <img src="/img/phone-call.svg" alt="Phone" />
-    <a href={`tel:${contactInfo.phone}`}>{contactInfo.phone}</a>
-  </h2>
-  <br /> -->
-  <h2>
-    <img src="/img/envelope.svg" alt="Email" />
-    <a
-      href={`mailto:${contactInfo.email}?subject=${contactInfo.emailSubject}&body=${contactInfo.emailBody}`}
-      target="_blank"
+<dialog id="contact-modal" class="p-8 w-lg mx-auto mt-10 bg-card border border-custom rounded-2xl shadow-2xl">
+  <div class="flex justify-between items-start mb-2">
+    <h3 class="text-2xl font-bold text-primary pt-1">Get in Touch</h3>
+    <button 
+      onclick="closeContactModal()" 
+      class="text-2xl text-tertiary hover:text-primary transition-colors p-2 pt-0"
+      aria-label="Close modal"
     >
-      {contactInfo.email}
-    </a>
-  </h2>
-  <br />
-  <h2>
-    <img src="/img/Linkedin-Logo--Streamline-Radix.svg" alt="LinkedIn" />
-    <a target="_blank" href={contactInfo.linkedin}>LinkedIn</a>
-  </h2>
+      ✕
+    </button>
+  </div>
+  
+  <div class="">
+    <div class="flex items-center gap-4 p-4 bg-tertiary/20 rounded-lg">
+      <div class="w-12 h-12 bg-accent/10 rounded-full flex items-center justify-center">
+        <i class="fas fa-envelope text-accent"></i>
+      </div>
+      <div>
+        <a
+          href={`mailto:${contactInfo.email}?subject=${contactInfo.emailSubject}&body=${contactInfo.emailBody}`}
+          target="_blank"
+          class="text-primary hover:text-accent font-medium link-hover"
+        >
+          {contactInfo.email}
+        </a>
+      </div>
+    </div>
+    
+    <div class="flex items-center gap-4 p-4 bg-tertiary/20 rounded-lg">
+      <div class="w-12 h-12 bg-accent/10 rounded-full flex items-center justify-center">
+        <i class="fab fa-linkedin text-accent"></i>
+      </div>
+      <div>
+        <a 
+          target="_blank" 
+          href={contactInfo.linkedin}
+          class="text-primary hover:text-accent font-medium link-hover"
+        >
+          LinkedIn Profile
+        </a>
+      </div>
+    </div>
+  </div>
 </dialog>

@@ -2,21 +2,109 @@
 // Hero section component
 ---
 
-<div class="container" id="about">
-  <div class="hero">
-    <div class="content">
-      <h1>Crafting Digital Experiences That Inspire and Innovate</h1>
-      <p>
-        Hi, I'm Yosri Mlik. A Software Engineer specializing in web and
-        mobile applications. <br />I turn ideas into seamless, user-friendly
-        solutions that make an impact.
-      </p>
-      <button onclick="openContactModal()">
-        Say Hello <i class="fa fa-arrow-right"></i>
-      </button>
-    </div>
-    <div class="hero-image">
-      <!-- Hero image placeholder -->
+<section class="hero min-h-screen flex items-center justify-center gradient-bg relative overflow-hidden pt-20" id="hero">
+  <!-- Animated background elements -->
+  <div class="absolute inset-0 overflow-hidden">
+    <div class="absolute top-20 left-10 w-72 h-72 bg-linear-to-br from-accent/20 to-transparent rounded-full blur-3xl animate-pulse"></div>
+    <div class="absolute bottom-20 right-10 w-96 h-96 bg-linear-to-tl from-accent-hover/20 to-transparent rounded-full blur-3xl animate-pulse delay-1000"></div>
+  </div>
+  
+  <div class="container mx-auto px-6 relative z-10">
+    <div class="grid md:grid-cols-2 gap-12 items-center">
+      <div class="content scroll-animate">
+        <h1 class="text-4xl md:text-6xl font-bold text-primary mb-6 animate-fade-in-up">
+          <span class="gradient-text">Crafting Digital Experiences</span>
+          <br />
+          That Inspire and Innovate
+        </h1>
+        <p class="text-lg md:text-xl text-secondary mb-8 leading-relaxed animate-fade-in-up delay-200">
+          Hi, I'm <span class="font-semibold text-accent">Yosri Mlik</span>. 
+          A Software Engineer specializing in web and mobile applications. 
+          <br class="hidden md:block" />
+          I turn ideas into seamless, user-friendly solutions that make an impact.
+        </p>
+        <div class="flex flex-col sm:flex-row gap-4 animate-fade-in-up delay-300">
+          <button 
+            onclick="openContactModal()" 
+            class="px-8 py-3 bg-linear-to-r from-accent to-accent-hover text-white rounded-full btn-hover transition-all duration-300 hover:scale-105 hover:shadow-lg font-medium text-lg"
+          >
+            Say Hello <i class="fas fa-arrow-right ml-2"></i>
+          </button>
+          <a 
+            href="#projects" 
+            class="px-8 py-3 border-2 border-accent text-accent rounded-full hover:bg-accent hover:text-white transition-all duration-300 font-medium text-lg text-center"
+          >
+            View My Work
+          </a>
+        </div>
+        
+        <!-- Social links -->
+        <div class="flex gap-4 mt-8 animate-fade-in-up delay-400">
+          <a 
+            href="https://github.com/YosriMlik" 
+            target="_blank" 
+            rel="noopener noreferrer"
+            class="w-12 h-12 bg-card rounded-full flex items-center justify-center border border-custom hover:bg-accent transition-all duration-300 hover:scale-110"
+          >
+            <i class="fab fa-github text-xl"></i>
+          </a>
+          <a 
+            href="https://linkedin.com/in/yosri-mlik" 
+            target="_blank" 
+            rel="noopener noreferrer"
+            class="w-12 h-12 bg-card rounded-full flex items-center justify-center border border-custom hover:bg-accent transition-all duration-300 hover:scale-110"
+          >
+            <i class="fab fa-linkedin text-xl"></i>
+          </a>
+          <a 
+            href="mailto:yosri.mlik@example.com" 
+            class="w-12 h-12 bg-card rounded-full flex items-center justify-center border border-custom hover:bg-accent transition-all duration-300 hover:scale-110"
+          >
+            <i class="fas fa-envelope text-xl"></i>
+          </a>
+        </div>
+      </div>
+      
+      <div class="hero-image flex justify-center items-center animate-fade-in-right">
+        <div class="relative">
+          <div class="w-80 h-80 md:w-96 md:h-96 bg-linear-to-br from-accent/20 to-accent-hover/20 rounded-full flex items-center justify-center  animate-pulse">
+            <div class="text-6xl md:text-8xl">
+              <i class="fas fa-code gradient-text"></i>
+            </div>
+          </div>
+          <!-- Floating elements -->
+          <div class="absolute -top-4 -right-4 w-20 h-20 bg-linear-to-br from-accent to-accent-hover rounded-lg animate-bounce delay-300"></div>
+          <div class="absolute -bottom-4 -left-4 w-16 h-16 bg-linear-to-br from-accent-hover to-accent rounded-lg animate-bounce delay-500"></div>
+        </div>
+      </div>
     </div>
   </div>
-</div>
+  
+  <!-- Scroll indicator -->
+  <div class="absolute bottom-8 left-1/2 transform -translate-x-1/2 animate-bounce">
+    <a href="#services" class="text-primary hover:text-accent transition-colors duration-300">
+      <i class="fas fa-chevron-down text-2xl"></i>
+    </a>
+  </div>
+</section>
+
+<script>
+  // Add scroll animations
+  const observerOptions = {
+    threshold: 0.1,
+    rootMargin: '0px 0px -50px 0px'
+  };
+
+  const observer = new IntersectionObserver((entries) => {
+    entries.forEach(entry => {
+      if (entry.isIntersecting) {
+        entry.target.classList.add('visible');
+      }
+    });
+  }, observerOptions);
+
+  document.addEventListener('DOMContentLoaded', () => {
+    const scrollElements = document.querySelectorAll('.scroll-animate');
+    scrollElements.forEach(el => observer.observe(el));
+  });
+</script>

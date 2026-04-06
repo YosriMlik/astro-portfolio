@@ -2,9 +2,72 @@
 export interface Props {
   title: string;
   description?: string;
+  image?: string;
+  type?: string;
+  keywords?: string;
 }
 
-const { title, description = "Yosri Mlik - Software Engineer specializing in web and mobile applications" } = Astro.props;
+const { 
+  title, 
+  description = "Yosri Mlik - Software Engineer specializing in web and mobile applications",
+  image = "/img/logo/logo_small_enhanced.png",
+  type = "website",
+  keywords = "software engineer, web development, mobile apps, React, Vue, Angular, Node.js, Python, Go, Tauri, portfolio"
+} = Astro.props;
+
+const siteUrl = Astro.url.origin;
+const currentUrl = Astro.url.href;
+const canonicalUrl = currentUrl;
+
+// JSON-LD structured data for SEO
+const structuredData = {
+  "@context": "https://schema.org",
+  "@type": type === "article" ? "BlogPosting" : "Person",
+  "name": type === "article" ? title : "Yosri Mlik",
+  "description": description,
+  "url": canonicalUrl,
+  "image": `${siteUrl}${image}`,
+  "sameAs": [
+    "https://github.com/YosriMlik",
+    "https://linkedin.com/in/yosri-mlik"
+  ],
+  ...(type === "article" ? {
+    "author": {
+      "@type": "Person",
+      "name": "Yosri Mlik",
+      "url": siteUrl
+    },
+    "publisher": {
+      "@type": "Person",
+      "name": "Yosri Mlik"
+    },
+    "datePublished": new Date().toISOString(),
+    "dateModified": new Date().toISOString()
+  } : {
+    "jobTitle": "Software Engineer",
+    "knowsAbout": [
+      "Web Development",
+      "Mobile App Development",
+      "React",
+      "Vue.js",
+      "Angular",
+      "Node.js",
+      "Python",
+      "Go",
+      "Tauri",
+      "Electron",
+      "Docker",
+      "CI/CD"
+    ],
+    "offers": {
+      "@type": "Offer",
+      "description": "Freelance software development services"
+    }
+  })
+};
+
+import ThemeToggle from '../components/ThemeToggle.astro';
+import '../styles/global.css';
 ---
 
 <!DOCTYPE html>
@@ -13,35 +76,56 @@ const { title, description = "Yosri Mlik - Software Engineer specializing in web
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <meta name="description" content={description} />
+    <meta name="keywords" content={keywords} />
+    <meta name="author" content="Yosri Mlik" />
     <meta name="generator" content={Astro.generator} />
+
+    <!-- Open Graph / Facebook -->
+    <meta property="og:type" content={type} />
+    <meta property="og:url" content={canonicalUrl} />
+    <meta property="og:title" content={title} />
+    <meta property="og:description" content={description} />
+    <meta property="og:image" content={`${siteUrl}${image}`} />
+    <meta property="og:image:width" content="1200" />
+    <meta property="og:image:height" content="630" />
+    <meta property="og:site_name" content="Yosri Mlik - Portfolio" />
+
+    <!-- Twitter -->
+    <meta property="twitter:card" content="summary_large_image" />
+    <meta property="twitter:url" content={canonicalUrl} />
+    <meta property="twitter:title" content={title} />
+    <meta property="twitter:description" content={description} />
+    <meta property="twitter:image" content={`${siteUrl}${image}`} />
+    <meta property="twitter:creator" content="@yosrimlik" />
+
+    <!-- Canonical URL -->
+    <link rel="canonical" href={canonicalUrl} />
 
     <!-- Google Search Console verification -->
     <meta name="google-site-verification" content="google-site-verification=7gGrveraAt0dRruepzXdWuhePxxXrHEOECQKyW3-wQ4" />
     
     <!-- Favicon -->
-    <link rel="favicon" href="/img/logo/logo_small_icon_only.png" type="image/x-icon" />
     <link rel="icon" href="/img/logo/logo_small_icon_only.png" type="image/x-icon" />
+    <link rel="apple-touch-icon" sizes="180x180" href="/img/logo/logo_small_icon_only.png" />
+    <link rel="icon" type="image/png" sizes="32x32" href="/img/logo/logo_small_icon_only.png" />
+    <link rel="icon" type="image/png" sizes="16x16" href="/img/logo/logo_small_icon_only.png" />
     
-    <!-- Fonts -->
-    <link rel="preconnect" href="https://fonts.googleapis.com" />
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@500&display=swap" rel="stylesheet" />
+    <!-- Fonts loaded via global.css -->
     
     <!-- External CSS -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css" />
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.css" />
     
-    <!-- Global Styles -->
-    <link rel="stylesheet" href="/styles/global.css" />
-    <link rel="stylesheet" href="/styles/components/header.css" />
-    <link rel="stylesheet" href="/styles/components/hero.css" />
-    <link rel="stylesheet" href="/styles/components/services.css" />
-    <link rel="stylesheet" href="/styles/components/projects.css" />
+    <!-- Global Styles (processed by Vite/Tailwind v4) -->
+    
+    <!-- Structured Data -->
+    <script type="application/ld+json" set:html={JSON.stringify(structuredData)}></script>
     
     <title>{title}</title>
   </head>
   <body>
     <slot />
+    <ThemeToggle />
     
     <!-- External Scripts -->
     <script defer src="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.js"></script>
@@ -62,6 +146,100 @@ const { title, description = "Yosri Mlik - Software Engineer specializing in web
           },
         });
       });
+    </script>
+    
+    <!-- Performance Optimizations -->
+    <script>
+      // Preload critical resources
+      const criticalResources = [
+        '/img/logo/logo_small_enhanced.png',
+        'https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap'
+      ];
+
+      criticalResources.forEach(resource => {
+        const link = document.createElement('link');
+        link.rel = 'preload';
+        link.href = resource;
+        if (resource.endsWith('.png') || resource.endsWith('.jpg') || resource.endsWith('.jpeg')) {
+          link.as = 'image';
+        } else if (resource.includes('fonts.googleapis.com')) {
+          link.as = 'style';
+        }
+        document.head.appendChild(link);
+      });
+
+      // Intersection Observer for lazy loading
+      const imageObserver = new IntersectionObserver((entries) => {
+        entries.forEach(entry => {
+          if (entry.isIntersecting) {
+            const img = entry.target as HTMLImageElement;
+            if (img.dataset.src) {
+              img.src = img.dataset.src;
+              img.classList.remove('lazy');
+              imageObserver.unobserve(img);
+            }
+          }
+        });
+      }, {
+        rootMargin: '50px 0px',
+        threshold: 0.01
+      });
+
+      // Observe lazy images
+      document.addEventListener('DOMContentLoaded', () => {
+        const lazyImages = document.querySelectorAll('img[data-src]');
+        lazyImages.forEach(img => imageObserver.observe(img));
+      });
+
+      // Performance monitoring
+      const measurePerformance = () => {
+        if ('performance' in window) {
+          const navigation = performance.getEntriesByType('navigation')[0] as PerformanceNavigationTiming;
+          const loadTime = navigation.loadEventEnd - navigation.loadEventStart;
+          
+          // Log performance metrics (in production, send to analytics)
+          console.log('Page load time:', loadTime + 'ms');
+          
+          // Core Web Vitals
+          if ('PerformanceObserver' in window) {
+            const observer = new PerformanceObserver((list) => {
+              list.getEntries().forEach((entry) => {
+                if (entry.entryType === 'largest-contentful-paint') {
+                  console.log('LCP:', entry.startTime);
+                }
+                if (entry.entryType === 'first-input') {
+                  console.log('FID:', (entry as PerformanceEventTiming).processingStart - entry.startTime);
+                }
+                if (entry.entryType === 'layout-shift') {
+                  console.log('CLS:', (entry as any).value);
+                }
+              });
+            });
+            
+            observer.observe({ entryTypes: ['largest-contentful-paint', 'first-input', 'layout-shift'] });
+          }
+        }
+      };
+
+      // Run performance measurement
+      if (document.readyState === 'complete') {
+        measurePerformance();
+      } else {
+        window.addEventListener('load', measurePerformance);
+      }
+
+      // Service Worker registration for offline support (optional)
+      if ('serviceWorker' in navigator) {
+        window.addEventListener('load', () => {
+          navigator.serviceWorker.register('/sw.js')
+            .then((registration) => {
+              console.log('SW registered: ', registration);
+            })
+            .catch((registrationError) => {
+              console.log('SW registration failed: ', registrationError);
+            });
+        });
+      }
     </script>
     
     <!-- Global Scripts -->
@@ -87,12 +265,12 @@ const { title, description = "Yosri Mlik - Software Engineer specializing in web
         const header = document.querySelector(".header");
         if (header) {
           if (window.pageYOffset > 50) {
-            header.style.backgroundColor = "rgba(255, 255, 255, 0.95)";
+            header.style.backgroundColor = "rgba(var(--bg-secondary), 0.85)";
             header.style.backdropFilter = "blur(10px)";
-            header.style.boxShadow = "0 2px 10px rgba(0, 0, 0, 0.1)";
+            header.style.boxShadow = "0 2px 10px rgba(var(--shadow), 0.1)";
             header.classList.add("scrolled");
           } else {
-            header.style.backgroundColor = "rgba(255, 255, 255, 0.1)";
+            header.style.backgroundColor = "rgba(var(--bg-secondary), 0)";
             header.style.backdropFilter = "blur(5px)";
             header.style.boxShadow = "none";
             header.classList.remove("scrolled");
@@ -100,6 +278,9 @@ const { title, description = "Yosri Mlik - Software Engineer specializing in web
         }
       }
 
+      // Initialize header state on page load
+      updateHeader();
+      
       // Add scroll listener
       window.addEventListener("scroll", updateHeader, { passive: true });
 
