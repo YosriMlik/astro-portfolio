@@ -79,8 +79,7 @@ const { title, date, description, technologies, details, links, images, clientLi
               class="inline-flex items-center gap-2 px-4 py-2 border-2 border-accent text-accent rounded-full hover:bg-accent hover:text-white transition-all text-sm font-medium"
             >
               <i class="fab fa-github"></i>
-              {links.download ? 'Download' : 'View Code'}
-            </a>
+View Code            </a>
           )}
           
           {links.download && (
@@ -88,7 +87,7 @@ const { title, date, description, technologies, details, links, images, clientLi
               href={links.download} 
               target="_blank" 
               rel="noopener noreferrer"
-              class="inline-flex items-center gap-2 px-4 py-2 bg-linear-to-rfrom-accent to-accent-hover text-white rounded-full hover:scale-105 transition-all text-sm font-medium"
+              class="inline-flex items-center gap-2 px-4 py-2 border-2 border-accent text-accent rounded-full hover:bg-accent hover:text-white transition-all text-sm font-medium"
             >
               <i class="fas fa-download"></i>
               Download

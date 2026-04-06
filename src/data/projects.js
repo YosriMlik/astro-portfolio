@@ -25,7 +25,7 @@ export const projects = [
     title: "AI Chat",
     date: "",
     description: "AI Chat application",
-    technologies: ["React/TypeScript", "Go/Fiber"],
+    technologies: ["React/TypeScript", "Next.js", "Elysia", "Shadcn UI"],
     details: [
       "AI Chat application",
       "Technologies: Next JS, Shadcn UI"
@@ -54,7 +54,7 @@ export const projects = [
     ],
     links: {
       demo: null,
-      repo: null,
+      repo: "https://github.com/YosriMlik/wifi-password-app",
       download: "https://github.com/YosriMlik/wifi-password-app/releases/tag/Wifi-password-app"
     },
     images: [
@@ -75,7 +75,7 @@ export const projects = [
     links: {
       demo: null,
       repo: "https://github.com/YosriMlik/gestion_soutenances/",
-      download: "https://github.com/YosriMlik/gestion_soutenances/releases/tag/beta"
+      download: null
     },
     clientLink: {
       name: "IIT",
