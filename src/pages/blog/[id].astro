@@ -1,0 +1,170 @@
+---
+import Layout from '../../layouts/Layout.astro';
+import Header from '../../components/Navbar.astro';
+import { blogPosts } from '../../data/blog.js';
+
+export async function getStaticPaths() {
+  return blogPosts.map(post => ({
+    params: { id: post.id },
+    props: { post }
+  }));
+}
+
+const { post } = Astro.props;
+---
+
+<Layout title={post.title} description={post.excerpt}>
+  <Header />
+  <article class="min-h-screen bg-primary">
+    <div class="container mx-auto px-6 py-20">
+      <!-- Article header -->
+      <header class="max-w-4xl mx-auto mb-12 scroll-animate">
+        <div class="text-center mb-8">
+          <div class="flex items-center justify-center gap-4 mb-4">
+            <span class="px-3 py-1 bg-accent/10 text-accent rounded-full text-sm font-medium">
+              {post.featured ? 'Featured' : 'Article'}
+            </span>
+            <span class="text-tertiary text-sm">{post.publishDate}</span>
+            <span class="text-tertiary text-sm">{post.readTime}</span>
+          </div>
+          <h1 class="text-3xl md:text-5xl font-bold text-primary mb-6 leading-tight">
+            {post.title}
+          </h1>
+          <p class="text-xl text-secondary mb-8 leading-relaxed max-w-3xl mx-auto">
+            {post.excerpt}
+          </p>
+          <div class="flex items-center justify-center gap-4 mb-8">
+            <div class="flex items-center gap-2">
+              <div class="w-12 h-12 bg-gradient-to-br from-accent to-accent-hover rounded-full flex items-center justify-center">
+                <span class="text-white font-bold">YM</span>
+              </div>
+              <div>
+                <p class="font-medium text-primary">{post.author}</p>
+                <p class="text-sm text-tertiary">Software Engineer</p>
+              </div>
+            </div>
+          </div>
+          <div class="flex flex-wrap gap-2 justify-center">
+            {post.tags.map(tag => (
+              <span class="px-3 py-1 bg-tertiary/10 text-tertiary rounded-full text-sm">
+                #{tag}
+              </span>
+            ))}
+          </div>
+        </div>
+        
+        <!-- Cover image -->
+        <div class="rounded-2xl overflow-hidden glass border border-custom">
+          <img 
+            src={post.coverImage} 
+            alt={post.title}
+            class="w-full h-64 md:h-96 object-cover"
+          />
+        </div>
+      </header>
+      
+      <!-- Article content -->
+      <div class="max-w-4xl mx-auto">
+        <div class="prose prose-lg prose-accent max-w-none">
+          <div class="glass rounded-2xl p-8 md:p-12 border border-custom">
+            <div class="text-primary leading-relaxed">
+              <post.content />
+            </div>
+          </div>
+        </div>
+      </div>
+      
+      <!-- Article footer -->
+      <footer class="max-w-4xl mx-auto mt-16">
+        <div class="glass rounded-2xl p-8 border border-custom">
+          <div class="text-center mb-8">
+            <h3 class="text-2xl font-bold text-primary mb-4">
+              Enjoyed this article?
+            </h3>
+            <p class="text-secondary mb-6">
+              Share it with others who might find it helpful!
+            </p>
+            <div class="flex items-center justify-center gap-4">
+              <a 
+                href={`https://twitter.com/intent/tweet?text=${encodeURIComponent(post.title)}&url=${encodeURIComponent(Astro.url.href)}`}
+                target="_blank"
+                rel="noopener noreferrer"
+                class="w-12 h-12 bg-[#1DA1F2] text-white rounded-full flex items-center justify-center hover:scale-110 transition-transform"
+              >
+                <i class="fab fa-twitter"></i>
+              </a>
+              <a 
+                href={`https://www.linkedin.com/sharing/share-offsite/?url=${encodeURIComponent(Astro.url.href)}`}
+                target="_blank"
+                rel="noopener noreferrer"
+                class="w-12 h-12 bg-[#0077B5] text-white rounded-full flex items-center justify-center hover:scale-110 transition-transform"
+              >
+                <i class="fab fa-linkedin"></i>
+              </a>
+              <a 
+                href={`https://github.com/YosriMlik`}
+                target="_blank"
+                rel="noopener noreferrer"
+                class="w-12 h-12 bg-[#333] text-white rounded-full flex items-center justify-center hover:scale-110 transition-transform"
+              >
+                <i class="fab fa-github"></i>
+              </a>
+            </div>
+          </div>
+          
+          <!-- Related posts -->
+          <div class="border-t border-custom pt-8">
+            <h4 class="text-xl font-bold text-primary mb-6">Related Articles</h4>
+            <div class="grid md:grid-cols-2 gap-6">
+              {blogPosts
+                .filter(p => p.id !== post.id && p.tags.some(tag => post.tags.includes(tag)))
+                .slice(0, 2)
+                .map(relatedPost => (
+                  <a 
+                    href={`/blog/${relatedPost.id}`}
+                    class="block p-6 rounded-lg border border-custom hover:bg-tertiary/5 transition-colors"
+                  >
+                    <h5 class="font-bold text-primary mb-2 line-clamp-2">{relatedPost.title}</h5>
+                    <p class="text-secondary text-sm line-clamp-2">{relatedPost.excerpt}</p>
+                    <span class="text-accent text-sm font-medium">Read More →</span>
+                  </a>
+                ))
+              }
+            </div>
+          </div>
+        </div>
+      </footer>
+      
+      <!-- Back to blog -->
+      <div class="text-center mt-12">
+        <a 
+          href="/blog"
+          class="inline-flex items-center gap-2 px-6 py-3 border-2 border-accent text-accent rounded-full hover:bg-accent hover:text-white transition-all duration-300 font-medium"
+        >
+          <i class="fas fa-arrow-left"></i>
+          Back to Blog
+        </a>
+      </div>
+    </div>
+  </article>
+</Layout>
+
+<script>
+  document.addEventListener('DOMContentLoaded', () => {
+    const observerOptions = {
+      threshold: 0.1,
+      rootMargin: '0px 0px -50px 0px'
+    };
+
+    const observer = new IntersectionObserver((entries) => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting) {
+          entry.target.classList.add('visible');
+        }
+      });
+    }, observerOptions);
+
+    const scrollElements = document.querySelectorAll('.scroll-animate');
+    scrollElements.forEach(el => observer.observe(el));
+  });
+</script>

@@ -1,0 +1,194 @@
+---
+// Header component with navigation
+---
+
+<style>
+  .logo img {
+    image-rendering: -webkit-optimize-contrast !important;
+    image-rendering: crisp-edges !important;
+    transform: none !important;
+    backface-visibility: visible !important;
+    will-change: auto !important;
+    width: 150px ;
+    height: 37px;
+  }
+  
+  .logo .logo-dark {
+    display: block;
+  }
+  
+  .logo .logo-light {
+    display: none;
+  }
+  
+  [data-theme="dark"] .logo .logo-dark {
+    display: none;
+  }
+  
+  [data-theme="dark"] .logo .logo-light {
+    display: block;
+  }
+</style>
+
+<header class="header fixed top-0 left-0 right-0 z-40 glass transition-all duration-300">
+  <div class="container mx-auto px-6 py-4">
+    <div class="flex items-center justify-between">
+      <a href="/" class="logo">
+        <img 
+          src="/img/logo/logo_large.png" 
+          alt="Yosri Mlik Logo" 
+          class="logo-dark"
+        />
+        <img 
+          src="/img/logo/logo_white_large.png" 
+          alt="Yosri Mlik Logo" 
+          class="logo-light"
+        />
+      </a>
+      
+      <nav class="hidden md:flex items-center space-x-8">
+        <a 
+          href={Astro.url.pathname === '/' ? '#about' : '/#about'} 
+          class={`nav-link text-primary hover:text-accent transition-colors duration-300 link-hover font-medium ${Astro.url.pathname === '/' || Astro.url.pathname === '/#about' ? 'active' : ''}`}
+        >
+          About
+        </a>
+        <!-- <a 
+          href={Astro.url.pathname === '/' ? '#services' : '/#services'} 
+          class={`nav-link text-primary hover:text-accent transition-colors duration-300 link-hover font-medium ${Astro.url.pathname === '/' || Astro.url.pathname === '/#services' ? 'active' : ''}`}
+        >
+          Services
+        </a> -->
+        <a 
+          href={Astro.url.pathname === '/' ? '#projects' : '/#projects'} 
+          class={`nav-link text-primary hover:text-accent transition-colors duration-300 link-hover font-medium ${Astro.url.pathname === '/' || Astro.url.pathname === '/#projects' ? 'active' : ''}`}
+        >
+          Projects
+        </a>
+        <a 
+          href="/blog" 
+          class={`nav-link text-primary hover:text-accent transition-colors duration-300 link-hover font-medium ${Astro.url.pathname === '/blog' ? 'active' : ''}`}
+        >
+          Blog
+        </a>
+        <a
+          href="https://github.com/YosriMlik/"
+          target="_blank"
+          rel="noopener noreferrer"
+          class="nav-link text-primary hover:text-accent transition-colors duration-300 link-hover font-medium flex items-center gap-2"
+        >
+          <i class="fab fa-github"></i>
+          Github
+        </a>
+      </nav>
+      
+      <button 
+        onclick="openContactModal()" 
+        class="hidden md:block px-6 py-2 bg-gradient-to-r from-accent to-accent-hover text-white rounded-full btn-hover transition-all duration-300 hover:scale-105 hover:shadow-lg font-medium"
+      >
+        Contact <i class="fas fa-arrow-right ml-2"></i>
+      </button>
+      
+      <button class="md:hidden text-primary text-2xl mobile-menu-toggle">
+        <i class="fas fa-bars"></i>
+      </button>
+    </div>
+    
+    <!-- Mobile menu -->
+    <nav class="nav-menu md:hidden hidden mt-4 py-4 border-t border-custom">
+      <a 
+        href={Astro.url.pathname === '/' ? '#about' : '/#about'} 
+        class={`nav-link block py-2 text-primary hover:text-accent transition-colors duration-300 ${Astro.url.pathname === '/' || Astro.url.pathname === '/#about' ? 'active' : ''}`}
+      >
+        About
+      </a>
+      <a 
+        href={Astro.url.pathname === '/' ? '#services' : '/#services'} 
+        class={`nav-link block py-2 text-primary hover:text-accent transition-colors duration-300 ${Astro.url.pathname === '/' || Astro.url.pathname === '/#services' ? 'active' : ''}`}
+      >
+        Services
+      </a>
+      <a 
+        href={Astro.url.pathname === '/' ? '#projects' : '/#projects'} 
+        class={`nav-link block py-2 text-primary hover:text-accent transition-colors duration-300 ${Astro.url.pathname === '/' || Astro.url.pathname === '/#projects' ? 'active' : ''}`}
+      >
+        Projects
+      </a>
+      <a 
+        href="/blog" 
+        class={`nav-link block py-2 text-primary hover:text-accent transition-colors duration-300 ${Astro.url.pathname === '/blog' ? 'active' : ''}`}
+      >
+        Blog
+      </a>
+      <a
+        href="https://github.com/YosriMlik/"
+        target="_blank"
+        rel="noopener noreferrer"
+        class="nav-link block py-2 text-primary hover:text-accent transition-colors duration-300"
+      >
+        Github
+      </a>
+      <button 
+        onclick="openContactModal()" 
+        class="mt-4 w-full px-6 py-2 bg-gradient-to-r from-accent to-accent-hover text-white rounded-full transition-all duration-300 hover:scale-105"
+      >
+        Contact <i class="fas fa-arrow-right ml-2"></i>
+      </button>
+    </nav>
+  </div>
+</header>
+
+<script>
+  document.addEventListener('DOMContentLoaded', () => {
+    const mobileMenuToggle = document.querySelector('.mobile-menu-toggle');
+    const navMenu = document.querySelector('.nav-menu');
+    
+    // Handle logo theme switching
+    function updateLogo() {
+      const currentTheme = document.documentElement.getAttribute('data-theme');
+      const logoDark = document.querySelector('.logo-dark') as HTMLImageElement;
+      const logoLight = document.querySelector('.logo-light') as HTMLImageElement;
+      
+      if (logoDark && logoLight) {
+        if (currentTheme === 'dark') {
+          logoDark.style.display = 'none';
+          logoLight.style.display = 'block';
+        } else {
+          logoDark.style.display = 'block';
+          logoLight.style.display = 'none';
+        }
+      }
+    }
+    
+    // Initial logo setup
+    updateLogo();
+    
+    // Watch for theme changes
+    const observer = new MutationObserver((mutations) => {
+      mutations.forEach((mutation) => {
+        if (mutation.type === 'attributes' && mutation.attributeName === 'data-theme') {
+          updateLogo();
+        }
+      });
+    });
+    
+    observer.observe(document.documentElement, {
+      attributes: true,
+      attributeFilter: ['data-theme']
+    });
+    
+    if (mobileMenuToggle && navMenu) {
+      mobileMenuToggle.addEventListener('click', () => {
+        navMenu.classList.toggle('hidden');
+      });
+      
+      // Close mobile menu when clicking on links
+      const navLinks = document.querySelectorAll('.nav-link');
+      navLinks.forEach(link => {
+        link.addEventListener('click', () => {
+          navMenu.classList.add('hidden');
+        });
+      });
+    }
+  });
+</script>

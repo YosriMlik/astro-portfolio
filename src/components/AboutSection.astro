@@ -1,0 +1,167 @@
+---
+// About section component with developer journey
+---
+
+<section class="py-20 bg-primary" id="about">
+  <div class="container mx-auto px-6">
+    <div class="text-center mb-16 scroll-animate">
+      <h2 class="text-3xl md:text-4xl font-bold text-primary mb-4">
+        My <span class="gradient-text">Developer Journey</span>
+      </h2>
+      <p class="text-lg text-secondary max-w-2xl mx-auto">
+        From curious beginner to passionate software engineer, here's my story
+      </p>
+    </div>
+    
+    <div class="grid md:grid-cols-2 gap-12 items-center mb-16">
+      <div class="scroll-animate">
+        <div class="glass rounded-2xl p-8 border border-custom">
+          <h3 class="text-2xl font-bold text-primary mb-4">How It All Started</h3>
+          <p class="text-secondary mb-4 leading-relaxed">
+            My journey into software development began with a simple curiosity about how websites work. 
+            What started as tinkering with HTML and CSS quickly evolved into a passion for creating 
+            digital solutions that solve real-world problems.
+          </p>
+          <p class="text-secondary mb-4 leading-relaxed">
+            I remember the first time I built a functional web application - the feeling of seeing 
+            code come to life and actually help someone was addictive. That moment solidified my 
+            decision to pursue software engineering as a career.
+          </p>
+          <div class="flex flex-wrap gap-2 mt-6">
+            <span class="px-3 py-1 bg-accent/10 text-accent rounded-full text-sm">Curiosity</span>
+            <span class="px-3 py-1 bg-accent/10 text-accent rounded-full text-sm">Problem-Solving</span>
+            <span class="px-3 py-1 bg-accent/10 text-accent rounded-full text-sm">Continuous Learning</span>
+          </div>
+        </div>
+      </div>
+      
+      <div class="scroll-animate">
+        <div class="glass rounded-2xl p-8 border border-custom">
+          <h3 class="text-2xl font-bold text-primary mb-4">My Philosophy</h3>
+          <p class="text-secondary mb-4 leading-relaxed">
+            I believe great software is built at the intersection of technical excellence and 
+            user empathy. It's not just about writing clean code, but about understanding the 
+            people who will use what we build.
+          </p>
+          <p class="text-secondary mb-4 leading-relaxed">
+            Every project is an opportunity to learn something new, whether it's a cutting-edge 
+            technology, a better way to organize code, or a deeper understanding of user needs. 
+            This growth mindset keeps me motivated and excited about what I do.
+          </p>
+          <div class="flex flex-wrap gap-2 mt-6">
+            <span class="px-3 py-1 bg-accent/10 text-accent rounded-full text-sm">User-Centered</span>
+            <span class="px-3 py-1 bg-accent/10 text-accent rounded-full text-sm">Clean Code</span>
+            <span class="px-3 py-1 bg-accent/10 text-accent rounded-full text-sm">Innovation</span>
+          </div>
+        </div>
+      </div>
+    </div>
+    
+    <!-- Timeline -->
+    <div class="scroll-animate">
+      <h3 class="text-2xl font-bold text-primary mb-8 text-center">Key Milestones</h3>
+      <div class="relative">
+        <!-- Timeline line -->
+        <div class="absolute left-1/2 transform -translate-x-1/2 w-0.5 h-full bg-gradient-to-b from-accent to-accent-hover"></div>
+        
+        <!-- Timeline items -->
+        <div class="space-y-12">
+          <div class="flex items-center justify-between">
+            <div class="w-5/12 text-right pr-8">
+              <div class="glass rounded-lg p-6 border border-custom">
+                <h4 class="font-bold text-primary mb-2">First Web Application</h4>
+                <p class="text-secondary text-sm mb-2">Bookshop E-commerce Platform</p>
+                <p class="text-tertiary text-sm">Learned Flask, Bootstrap, and Vue.js while building a full-stack e-commerce solution</p>
+              </div>
+            </div>
+            <div class="w-2/12 flex justify-center">
+              <div class="w-4 h-4 bg-accent rounded-full border-4 border-primary"></div>
+            </div>
+            <div class="w-5/12 pl-8">
+              <div class="text-accent font-bold">2022</div>
+            </div>
+          </div>
+          
+          <div class="flex items-center justify-between">
+            <div class="w-5/12 text-right pr-8">
+              <div class="text-accent font-bold">2023</div>
+            </div>
+            <div class="w-2/12 flex justify-center">
+              <div class="w-4 h-4 bg-accent rounded-full border-4 border-primary"></div>
+            </div>
+            <div class="w-5/12 pl-8">
+              <div class="glass rounded-lg p-6 border border-custom">
+                <h4 class="font-bold text-primary mb-2">Enterprise Project</h4>
+                <p class="text-secondary text-sm mb-2">Defense Management System</p>
+                <p class="text-tertiary text-sm">Built a desktop application for IIT using Tauri, React, and Rust</p>
+              </div>
+            </div>
+          </div>
+          
+          <div class="flex items-center justify-between">
+            <div class="w-5/12 text-right pr-8">
+              <div class="glass rounded-lg p-6 border border-custom">
+                <h4 class="font-bold text-primary mb-2">AI Integration</h4>
+                <p class="text-secondary text-sm mb-2">AI Chat Application</p>
+                <p class="text-tertiary text-sm">Developed a modern AI chat interface using Next.js and integrated with various LLM APIs</p>
+              </div>
+            </div>
+            <div class="w-2/12 flex justify-center">
+              <div class="w-4 h-4 bg-accent rounded-full border-4 border-primary"></div>
+            </div>
+            <div class="w-5/12 pl-8">
+              <div class="text-accent font-bold">2024</div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    
+    <!-- Skills highlight -->
+    <div class="mt-16 scroll-animate">
+      <h3 class="text-2xl font-bold text-primary mb-8 text-center">Core Competencies</h3>
+      <div class="grid grid-cols-2 md:grid-cols-4 gap-6">
+        <div class="glass rounded-lg p-6 text-center border border-custom transition-transform duration-300">
+          <div class="text-3xl mb-3">🚀</div>
+          <h4 class="font-bold text-primary mb-2">Frontend</h4>
+          <p class="text-secondary text-sm">React, Vue, Angular, Tailwind</p>
+        </div>
+        <div class="glass rounded-lg p-6 text-center border border-custom transition-transform duration-300">
+          <div class="text-3xl mb-3">⚙️</div>
+          <h4 class="font-bold text-primary mb-2">Backend</h4>
+          <p class="text-secondary text-sm">Node.js, Python, Go, .NET</p>
+        </div>
+        <div class="glass rounded-lg p-6 text-center border border-custom transition-transform duration-300">
+          <div class="text-3xl mb-3">📱</div>
+          <h4 class="font-bold text-primary mb-2">Mobile</h4>
+          <p class="text-secondary text-sm">Flutter, React Native</p>
+        </div>
+        <div class="glass rounded-lg p-6 text-center border border-custom transition-transform duration-300">
+          <div class="text-3xl mb-3">🛠️</div>
+          <h4 class="font-bold text-primary mb-2">DevOps</h4>
+          <p class="text-secondary text-sm">Docker, CI/CD, Cloud</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<script>
+  document.addEventListener('DOMContentLoaded', () => {
+    const observerOptions = {
+      threshold: 0.1,
+      rootMargin: '0px 0px -50px 0px'
+    };
+
+    const observer = new IntersectionObserver((entries) => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting) {
+          entry.target.classList.add('visible');
+        }
+      });
+    }, observerOptions);
+
+    const scrollElements = document.querySelectorAll('.scroll-animate');
+    scrollElements.forEach(el => observer.observe(el));
+  });
+</script>

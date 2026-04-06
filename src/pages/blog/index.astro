@@ -1,0 +1,156 @@
+---
+import Layout from '../../layouts/Layout.astro';
+import Header from '../../components/Navbar.astro';
+import { blogPosts } from '../../data/blog.js';
+import BlogSection from '../../components/BlogSection.astro';
+---
+
+<Layout title="Blog - Yosri Mlik" description="Technical articles and tutorials on software development, architecture, and best practices">
+  <div class="min-h-screen bg-primary pt-18">
+    <Header />
+    <!-- Blog header -->
+    <section class="py-16 gradient-bg">
+      <div class="container mx-auto px-6 text-center">
+        <h1 class="text-4xl md:text-5xl font-bold text-primary mb-6">
+          Technical <span class="gradient-text">Blog</span>
+        </h1>
+        <p class="text-xl text-secondary max-w-3xl mx-auto mb-8">
+          In-depth articles, tutorials, and case studies from my software development journey. 
+          Learn about modern web technologies, best practices, and real-world solutions.
+        </p>
+        
+        <!-- Search and filter -->
+        <div class="max-w-2xl mx-auto">
+          <div class="flex flex-col sm:flex-row gap-4">
+            <input 
+              type="search" 
+              placeholder="Search articles..."
+              id="search-input"
+              class="flex-1 px-4 py-3 rounded-lg border border-custom bg-card text-primary placeholder-tertiary focus:outline-none focus:border-accent transition-colors"
+            />
+            <select 
+              id="tag-filter"
+              class="px-4 py-3 rounded-lg border border-custom bg-card text-primary focus:outline-none focus:border-accent transition-colors"
+            >
+              <option value="">All Topics</option>
+              <option value="React">React</option>
+              <option value="AI">AI</option>
+              <option value="Performance">Performance</option>
+              <option value="Architecture">Architecture</option>
+              <option value="Tauri">Tauri</option>
+              <option value="Go">Go</option>
+            </select>
+          </div>
+        </div>
+      </div>
+    </section>
+    
+    <!-- Blog posts grid -->
+    <section class="py-16">
+      <div class="container mx-auto px-6">
+        <div id="blog-posts-container" class="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
+          {blogPosts.map(post => (
+            <article class="blog-post glass rounded-xl overflow-hidden border border-custom hover:scale-[1.02] transition-all duration-300 group" data-tags={post.tags.join(',')}>
+              <div class="relative overflow-hidden h-48">
+                <img 
+                  src={post.coverImage} 
+                  alt={post.title}
+                  class="w-full h-full object-cover group-hover:scale-110 transition-transform duration-300"
+                  loading="lazy"
+                />
+                {post.featured && (
+                  <div class="absolute top-4 left-4">
+                    <span class="px-3 py-1 bg-accent text-white rounded-full text-sm font-medium">
+                      Featured
+                    </span>
+                  </div>
+                )}
+                <div class="absolute inset-0 bg-gradient-to-t from-black/50 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
+              </div>
+              <div class="p-6">
+                <div class="flex items-center gap-2 mb-3">
+                  <span class="text-tertiary text-sm">{post.publishDate}</span>
+                  <span class="text-tertiary text-sm">•</span>
+                  <span class="text-tertiary text-sm">{post.readTime}</span>
+                </div>
+                <h4 class="text-lg font-bold text-primary mb-2 line-clamp-2">
+                  <a href={`/blog/${post.id}`} class="hover:text-accent transition-colors">
+                    {post.title}
+                  </a>
+                </h4>
+                <p class="text-secondary text-sm mb-4 line-clamp-3">{post.excerpt}</p>
+                <div class="flex items-center justify-between">
+                  <div class="flex flex-wrap gap-1">
+                    {post.tags.slice(0, 2).map(tag => (
+                      <span class="px-2 py-1 bg-tertiary/10 text-tertiary rounded text-xs">
+                        {tag}
+                      </span>
+                    ))}
+                  </div>
+                  <a 
+                    href={`/blog/${post.id}`}
+                    class="text-accent hover:text-accent-hover font-medium text-sm link-hover"
+                  >
+                    Read More
+                  </a>
+                </div>
+              </div>
+            </article>
+          ))}
+        </div>
+        
+        <!-- No results message -->
+        <div id="no-results" class="hidden text-center py-16">
+          <div class="glass rounded-2xl p-8 max-w-md mx-auto border border-custom">
+            <i class="fas fa-search text-4xl text-tertiary mb-4"></i>
+            <h3 class="text-xl font-bold text-primary mb-2">No articles found</h3>
+            <p class="text-secondary">Try adjusting your search or filter criteria</p>
+          </div>
+        </div>
+      </div>
+    </section>
+  </div>
+</Layout>
+
+<script>
+  document.addEventListener('DOMContentLoaded', () => {
+    const searchInput = document.getElementById('search-input');
+    const tagFilter = document.getElementById('tag-filter');
+    const blogPostsContainer = document.getElementById('blog-posts-container');
+    const noResults = document.getElementById('no-results');
+    const blogPosts = document.querySelectorAll('.blog-post');
+
+    function filterPosts() {
+      const searchTerm = searchInput.value.toLowerCase();
+      const selectedTag = tagFilter.value.toLowerCase();
+      let visibleCount = 0;
+
+      blogPosts.forEach(post => {
+        const title = post.querySelector('h4 a').textContent.toLowerCase();
+        const excerpt = post.querySelector('.line-clamp-3').textContent.toLowerCase();
+        const tags = post.dataset.tags.toLowerCase();
+        
+        const matchesSearch = title.includes(searchTerm) || excerpt.includes(searchTerm);
+        const matchesTag = !selectedTag || tags.includes(selectedTag);
+        
+        if (matchesSearch && matchesTag) {
+          post.style.display = 'block';
+          visibleCount++;
+        } else {
+          post.style.display = 'none';
+        }
+      });
+
+      if (visibleCount === 0) {
+        noResults.classList.remove('hidden');
+        blogPostsContainer.classList.add('hidden');
+      } else {
+        noResults.classList.add('hidden');
+        blogPostsContainer.classList.remove('hidden');
+      }
+    }
+
+    searchInput.addEventListener('input', filterPosts);
+    tagFilter.addEventListener('change', filterPosts);
+  });
+</script>
